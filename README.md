@@ -1,8 +1,8 @@
-# A2.4 | Árvores binárias de pesquisa e TAD Map
+# A2.4 | Árvores binárias de pesquisa e ADT Map
 
 ## Objetivos
 
-Distinguir o TAD `Map<K,V>` da estrutura ABP; analisar inserção e os três casos de remoção; implementar pesquisa recursiva e travessia em ordem; verificar a relação entre a altura e o custo das operações.
+Distinguir o ADT `Map<K,V>` da estrutura ABP; analisar inserção e os três casos de remoção; implementar pesquisa recursiva e travessia em ordem; verificar a relação entre a altura e o custo das operações.
 
 ## Atividade
 
@@ -27,17 +27,26 @@ Em `searchNodeWithKey(K key, BSTNode treeRoot)`, tratar primeiro o caso base `tr
 
 ### Inserção e substituição: `put`
 
-Ler a implementação disponibilizada de `put` e `insertBST`. Para uma árvore vazia, criar a raiz. Caso contrário, comparar a chave com a do nó atual e seguir à esquerda ou à direita até uma ligação vazia, onde se cria um novo nó. Se a **chave já existir**, atualizar apenas o valor no mesmo nó, devolver o valor antigo e não alterar o número de mapeamentos. Por exemplo, depois de `put(6, "Beatriz")`, a chamada `put(6, "novo")` devolve `"Beatriz"`, mantém o tamanho e faz `get(6)` devolver `"novo"`. A comparação é sempre entre chaves; valores iguais podem pertencer a chaves diferentes.
+Ler a implementação disponibilizada de `put` e `insertBST`. 
+- Para uma árvore vazia, criar a raiz. Caso contrário, comparar a chave com a do nó atual e seguir à esquerda ou à direita até uma ligação vazia, onde se cria um novo nó. 
+- Se a **chave já existir**, atualizar apenas o valor no mesmo nó, devolver o valor antigo e não alterar o número de mapeamentos. 
+  - Por exemplo, depois de `put(6, "Beatriz")`, a chamada `put(6, "novo")` devolve `"Beatriz"`, mantém o tamanho e faz `get(6)` devolver `"novo"`. A comparação é sempre entre chaves; valores iguais podem pertencer a chaves diferentes.
 
 ### Remoção: `remove` e mínimo da subárvore
 
-Ler `remove` e localizar no código os três casos: (1) nó sem filhos, desligá-lo do pai; (2) nó com um filho, ligar o filho ao pai do nó removido; (3) nó com dois filhos, obter o **mínimo da subárvore direita**, retirar o sucessor da posição antiga e copiar a respetiva chave e valor para o nó original. Em todos os casos, devolver o valor que estava associado à chave pedida, ou `null` se ela não existir. Confirmar separadamente os casos que alteram `root` e atualizar a referência `parent` do filho que passa a ocupar o lugar do nó removido.
+Ler `remove` e localizar no código os três casos: 
+(1) nó sem filhos, desligá-lo do pai; 
+(2) nó com um filho, ligar o filho ao pai do nó removido; 
+(3) nó com dois filhos, obter o **mínimo da subárvore direita**, retirar o sucessor da posição antiga e copiar a respetiva chave e valor para o nó original. Em todos os casos, devolver o valor que estava associado à chave pedida, ou `null` se ela não existir. Confirmar separadamente os casos que alteram `root` e atualizar a referência `parent` do filho que passa a ocupar o lugar do nó removido.
 
 Implementar `getLeftmostNode(BSTNode treeRoot)`: devolver `null` para subárvore vazia; caso contrário, seguir `left` até ao nó mais à esquerda. O código de remoção fornecido utiliza este auxiliar para localizar o sucessor no terceiro caso.
 
 ### Percursos: `keys` e `values`
 
-Completar `appendKeys` e `appendValues` com a sequência **subárvore esquerda → nó → subárvore direita**. `keys()` recolhe chaves ordenadas; `values()` recolhe os valores associados **pela ordem das chaves**, mesmo quando os valores não estão ordenados. Por exemplo, para `(3, "Z"), (1, "A"), (6, "B")`, obter `keys() = [1, 3, 6]` e `values() = [A, Z, B]`. Em ambos os auxiliares, terminar imediatamente quando a subárvore for `null`.
+Completar `appendKeys` e `appendValues` com a sequência **subárvore esquerda → nó → subárvore direita** (percurso em in-order). 
+- `keys()` recolhe chaves ordenadas; 
+- `values()` recolhe os valores associados **pela ordem das chaves**, mesmo quando os valores não estão ordenados. 
+  - Por exemplo, para `(3, "Z"), (1, "A"), (6, "B")`, obter `keys() = [1, 3, 6]` e `values() = [A, Z, B]`. Em ambos os auxiliares, terminar imediatamente quando a subárvore for `null`.
 
 ## Testes unitários a implementar
 
@@ -59,9 +68,8 @@ Criar `src/test/java/pt/unips/estsetubal/tapoo/adt/MapTest.java` com JUnit 5. Us
 | Limpeza e reutilização | Depois de `clear()`, mapa vazio; novo `put` funciona. |
 | Chave nula | `put(null, "X")`, `get(null)`, `containsKey(null)` e `remove(null)` lançam `NullPointerException`. |
 
-**Caso adicional recomendado:** remover um nó com dois filhos cujo sucessor tem um filho direito (por exemplo, inserir `8, 3, 12, 10, 11, 14` e remover 8). Verificar que 11 permanece acessível; este caso ajuda a detetar ligações incorretas durante a remoção.
 
-Para testar uma sequência, verificar o estado **após cada operação**. As coleções devolvidas por `keys()` e `values()` devem ser comparadas pelo conteúdo e ordem, por exemplo convertendo-as em `ArrayList` nas asserções. Não comparar o texto de `toString()` como substituto do comportamento do mapa.
+**Nota:** As coleções devolvidas por `keys()` e `values()` devem ser comparadas pelo conteúdo e ordem, por exemplo convertendo-as em `ArrayList` nas asserções. Não comparar o texto de `toString()` como substituto do comportamento do mapa.
 
 ## Critérios de conclusão
 
