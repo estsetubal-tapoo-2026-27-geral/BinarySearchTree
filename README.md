@@ -9,7 +9,7 @@ Distinguir o ADT `Map<K,V>` da estrutura ABP; analisar inserção e os três cas
 1. Desenhar a árvore obtida por `put` com as chaves `8, 3, 12, 1, 6, 10, 14`. Indicar o caminho da pesquisa de 10 e 7. Localizar o mínimo da subárvore direita de 8.
 2. Ler o código de `put`, `insertBST` e `remove`. Explicar o resultado de inserir novamente a chave 6 com outro valor. Anotar em que linhas se resolvem os casos de remoção de folha, nó com um filho e nó com dois filhos.
 3. Implementar `searchNodeWithKey(K key, BSTNode treeRoot)`: devolver o nó encontrado ou `null`, usando recursão e `compareTo`.
-4. Implementar `getLeftmostNode(BSTNode treeRoot)`: devolver `null` para subárvore vazia; caso contrário, seguir `left` até ao mínimo.
+4. Implementar `getLeftmostNode(BSTNode treeRoot)`:devolver o nó mais à esquerda, retornando o próprio nó quando não existe subárvore esquerda; caso exista, continua a procura recursivamente pela subaevore esquerda.
 5. Implementar `appendKeys` e `appendValues` por travessia **esquerda → nó → direita** (travessia in-order). As coleções devolvidas são cópias; os valores aparecem pela ordem das respetivas chaves.
 6. Executar `Main` com os pares `(8, Ana)`, `(3, Pedro)`, `(12, Jose)`, `(1, Jose)`, `(6, Beatriz)`, `(10, Rui)` e `(14, Luis)`. 
    - Explicar por que razão duas chaves podem ter o mesmo valor.
